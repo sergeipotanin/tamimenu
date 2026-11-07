@@ -17,10 +17,10 @@ body.lock{overflow:hidden}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .mono{background:var(--milk);-webkit-mask:center/contain no-repeat;mask:center/contain no-repeat}
 /* hero */
-.wrap{height:calc(100svh + 70svh)}
+.wrap{height:calc(100svh + 90svh)}
 .hero{position:sticky;top:0;height:100svh;min-height:520px;overflow:hidden;border-radius:0 0 28px 28px;background:#3b907c url(imageshero/bg.webp) center/cover}
-.hero .logo{position:absolute;top:max(6svh,28px);left:50%;width:56%;aspect-ratio:1000/433;margin-left:-28%;-webkit-mask-image:url(images/logo-tagline.png);mask-image:url(images/logo-tagline.png)}
-.stage{position:absolute;left:2%;width:96%;aspect-ratio:2209/897;top:46%}
+.hero .logo{position:absolute;top:18svh;left:50%;width:56%;aspect-ratio:1000/433;margin-left:-28%;-webkit-mask-image:url(images/logo-tagline.png);mask-image:url(images/logo-tagline.png)}
+.stage{position:absolute;left:2%;width:96%;aspect-ratio:2209/897;top:56%}
 .stage img{position:absolute;display:block;pointer-events:none;will-change:transform}
 .stage .b{left:0;top:0;width:100%}
 .stage .ing{transform:translate(-50%,-50%)}
@@ -80,7 +80,7 @@ footer a{color:var(--milk)}footer p{opacity:.9}
 <body>
 <div class="wrap" id="wrap"><header class="hero" id="hero">
   <div class="mono logo"></div>
-  <div class="stage" id="stage"><div class="sh"></div><img class="b" src="imageshero/bowl-bottom.webp" alt=""><img class="ing" src="imageshero/nori.webp" alt="" style="left:26.59%;top:3.82%;width:33.39%" data-up="0.55" data-dx="-0.12" data-rot="-14"><img class="ing" src="imageshero/carrot.webp" alt="" style="left:50.47%;top:13.86%;width:21.74%" data-up="0.72" data-dx="0.06" data-rot="12"><img class="ing" src="imageshero/meat.webp" alt="" style="left:80.94%;top:25.81%;width:22.13%" data-up="0.62" data-dx="0.16" data-rot="-10"><img class="ing" src="imageshero/onion.webp" alt="" style="left:48.52%;top:32.98%;width:26.79%" data-up="0.6" data-dx="0.02" data-rot="20"><img class="ing" src="imageshero/tofu.webp" alt="" style="left:59.39%;top:43.5%;width:16.3%" data-up="0.35" data-dx="0.1" data-rot="-18"><img class="ing" src="imageshero/noodle.webp" alt="" style="left:65.99%;top:38.72%;width:20.57%" data-up="0.5" data-dx="0.14" data-rot="10"><img class="ing" src="imageshero/egg.webp" alt="" style="left:26.79%;top:35.85%;width:24.26%" data-up="0.42" data-dx="-0.06" data-rot="8"><img class="b" src="imageshero/bowl-top.webp" alt=""></div>
+  <div class="stage" id="stage"><div class="sh"></div><img class="b" src="imageshero/bowl-bottom.webp" alt=""><img class="ing" src="imageshero/soup.webp" alt="" style="left:49%;top:28%;width:90%" data-up="0.05" data-dx="0" data-rot="0" data-keep="1"><img class="ing" src="imageshero/nori.webp" alt="" style="left:26.59%;top:3.82%;width:33.39%" data-up="0.275" data-dx="-0.06" data-rot="-7.0"><img class="ing" src="imageshero/carrot.webp" alt="" style="left:50.47%;top:13.86%;width:21.74%" data-up="0.36" data-dx="0.03" data-rot="6.0"><img class="ing" src="imageshero/meat.webp" alt="" style="left:80.94%;top:25.81%;width:22.13%" data-up="0.31" data-dx="0.08" data-rot="-5.0"><img class="ing" src="imageshero/onion.webp" alt="" style="left:48.52%;top:32.98%;width:26.79%" data-up="0.3" data-dx="0.01" data-rot="10.0"><img class="ing" src="imageshero/tofu.webp" alt="" style="left:59.39%;top:43.5%;width:16.3%" data-up="0.175" data-dx="0.05" data-rot="-9.0"><img class="ing" src="imageshero/noodle.webp" alt="" style="left:65.99%;top:38.72%;width:20.57%" data-up="0.25" data-dx="0.07" data-rot="5.0"><img class="ing" src="imageshero/egg.webp" alt="" style="left:26.79%;top:35.85%;width:24.26%" data-up="0.21" data-dx="-0.03" data-rot="4.0"><img class="b" src="imageshero/bowl-top.webp" alt=""></div>
   <button class="hint" id="hint">меню ↓</button>
 </header></div>
 <nav class="nav" id="nav">
@@ -124,8 +124,8 @@ M.categories.forEach(function(c){
 /* scroll: parallax + active tab */
 var nav=$("#nav"),tick=false,cur=null,stage=$("#stage"),ings=[].slice.call(document.querySelectorAll(".ing"));
 function onScroll(){
-  var y=window.scrollY,vh=window.innerHeight,p=Math.min(1,Math.max(0,y/(vh*.7))),e=1-(1-p)*(1-p),sw=stage.offsetWidth;
-  if(y<vh*2)ings.forEach(function(el){var a=el.dataset;el.style.transform="translate(-50%,-50%) translate3d("+(a.dx*sw*e)+"px,"+(-a.up*vh*e)+"px,0) rotate("+(a.rot*e)+"deg)";el.style.opacity=1-Math.max(0,(p-.5)/.5)});
+  var y=window.scrollY,vh=window.innerHeight,p=Math.min(1,Math.max(0,y/(vh*.9))),e=1-(1-p)*(1-p),sw=stage.offsetWidth;
+  if(y<vh*2)ings.forEach(function(el){var a=el.dataset;el.style.transform="translate(-50%,-50%) translate3d("+(a.dx*sw*e)+"px,"+(-a.up*vh*e)+"px,0) rotate("+(a.rot*e)+"deg)";el.style.opacity=a.keep?1:1-Math.max(0,(p-.5)/.5)});
   var act=null,navH=nav.offsetHeight;
   secs.forEach(function(s){if(s.el.style.display!=="none"&&s.el.getBoundingClientRect().top<=navH+40)act=s});
   if(act!==cur){cur=act;secs.forEach(function(s){s.btn.classList.toggle("on",s===act)});
