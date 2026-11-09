@@ -64,7 +64,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "tataki2"
   },
   {
    "id": "dish-2",
@@ -193,7 +194,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "handroll2"
   },
   {
    "id": "dish-9",
@@ -208,7 +210,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "popcorn2"
   },
   {
    "id": "dish-10",
@@ -224,6 +227,7 @@ window.MENU={
      "carb": 97
     }
    ],
+   "img": "popcorn",
    "note": "Можем сделать поострее"
   },
   {
@@ -1025,6 +1029,32 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
+   ]
+  }
+ ],
+ "stories": [
+  {
+   "name": "Акция",
+   "cover": "sale-1",
+   "slides": [
+    "sale-1",
+    "sale-2"
+   ]
+  },
+  {
+   "name": "Система лояльности",
+   "cover": "loyalty-1",
+   "slides": [
+    "loyalty-1",
+    "loyalty-2"
+   ]
+  },
+  {
+   "name": "Новости",
+   "cover": "news-1",
+   "slides": [
+    "news-1",
+    "news-2"
    ]
   }
  ]
