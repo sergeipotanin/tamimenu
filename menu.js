@@ -65,7 +65,11 @@ window.MENU={
      "carb": 97
     }
    ],
-   "img": "tataki2"
+   "img": "tataki2",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-2",
@@ -80,7 +84,11 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-3",
@@ -96,7 +104,11 @@ window.MENU={
      "carb": 97
     }
    ],
-   "img": "tataki"
+   "img": "tataki",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-4",
@@ -111,7 +123,11 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-5",
@@ -126,7 +142,11 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-6",
@@ -141,7 +161,11 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-7",
@@ -179,7 +203,11 @@ window.MENU={
      "img": "salomon"
     }
    ],
-   "img": "handroll"
+   "img": "handroll",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-8",
@@ -195,7 +223,11 @@ window.MENU={
      "carb": 97
     }
    ],
-   "img": "handroll2"
+   "img": "handroll2",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-9",
@@ -211,7 +243,11 @@ window.MENU={
      "carb": 97
     }
    ],
-   "img": "popcorn2"
+   "img": "popcorn2",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-10",
@@ -228,7 +264,11 @@ window.MENU={
     }
    ],
    "img": "popcorn",
-   "note": "Можем сделать поострее"
+   "note": "Можем сделать поострее",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-11",
@@ -1037,24 +1077,38 @@ window.MENU={
    "name": "Акция",
    "cover": "sale-1",
    "slides": [
-    "sale-1",
-    "sale-2"
+    {
+     "img": "sale-1"
+    },
+    {
+     "img": "sale-2"
+    }
    ]
   },
   {
    "name": "Система лояльности",
    "cover": "loyalty-1",
    "slides": [
-    "loyalty-1",
-    "loyalty-2"
+    {
+     "img": "loyalty-1",
+     "url": "https://injoy.getmeback.ru/wallet/frontend#/wallet/android",
+     "label": "Получить карту"
+    },
+    {
+     "img": "loyalty-2"
+    }
    ]
   },
   {
    "name": "Новости",
    "cover": "news-1",
    "slides": [
-    "news-1",
-    "news-2"
+    {
+     "img": "news-1"
+    },
+    {
+     "img": "news-2"
+    }
    ]
   }
  ]
