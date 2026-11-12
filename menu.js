@@ -52,45 +52,6 @@ window.MENU={
  ],
  "dishes": [
   {
-   "id": "dish-1",
-   "cat": "c1",
-   "name": "Тартар из говядины с муссом шиитаке",
-   "variants": [
-    {
-     "p": 650,
-     "w": 180,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "img": "tataki2",
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
-   "id": "dish-2",
-   "cat": "c1",
-   "name": "Камамбер с соусом юдзу-мед",
-   "variants": [
-    {
-     "p": 670,
-     "w": 200,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
    "id": "dish-3",
    "cat": "c1",
    "name": "Татаки из тунца с соусом понзу-терияки",
@@ -105,24 +66,8 @@ window.MENU={
     }
    ],
    "img": "tataki",
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
-   "id": "dish-4",
-   "cat": "c1",
-   "name": "Тартар из тунца на рисовых чипсах",
-   "variants": [
-    {
-     "p": 690,
-     "w": 170,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
+   "badges": [
+    "hit"
    ],
    "rec": {
     "t": "К этому блюду рекомендуем вино",
@@ -143,25 +88,7 @@ window.MENU={
      "carb": 97
     }
    ],
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
-   "id": "dish-6",
-   "cat": "c1",
-   "name": "Севиче из лосося с манго и апельсином",
-   "variants": [
-    {
-     "p": 660,
-     "w": 290,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
+   "img": "takosushi",
    "rec": {
     "t": "К этому блюду рекомендуем вино",
     "i": "wine"
@@ -210,26 +137,6 @@ window.MENU={
    }
   },
   {
-   "id": "dish-8",
-   "cat": "c1",
-   "name": "Хэнд-ролл сет 3шт.",
-   "variants": [
-    {
-     "p": 560,
-     "w": 210,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "img": "handroll2",
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
    "id": "dish-9",
    "cat": "c1",
    "name": "Батат фри",
@@ -243,7 +150,7 @@ window.MENU={
      "carb": 97
     }
    ],
-   "img": "popcorn2",
+   "img": "batat",
    "rec": {
     "t": "К этому блюду рекомендуем вино",
     "i": "wine"
@@ -291,7 +198,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "dimsams"
   },
   {
    "id": "dish-12",
@@ -314,7 +222,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "dampling"
   },
   {
    "id": "dish-13",
@@ -337,7 +246,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "votons"
   },
   {
    "id": "dish-14",
@@ -360,7 +270,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "gizda"
   },
   {
    "id": "dish-15",
@@ -376,7 +287,8 @@ window.MENU={
      "carb": 97
     }
    ],
-   "sub": "Соусы к пельменям"
+   "sub": "Соусы к пельменям",
+   "img": "sous2"
   },
   {
    "id": "dish-16",
@@ -392,7 +304,8 @@ window.MENU={
      "carb": 97
     }
    ],
-   "sub": "Соусы к пельменям"
+   "sub": "Соусы к пельменям",
+   "img": "sous1"
   },
   {
    "id": "dish-17",
@@ -407,7 +320,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "baklagan"
   },
   {
    "id": "dish-18",
@@ -422,37 +336,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-19",
-   "cat": "c3",
-   "name": "Салат с жареным халуми и киноа",
-   "variants": [
-    {
-     "p": 640,
-     "w": 240,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-20",
-   "cat": "c3",
-   "name": "Салат с манго-карри и креветками",
-   "variants": [
-    {
-     "p": 560,
-     "w": 250,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "balichiken"
   },
   {
    "id": "dish-21",
@@ -467,7 +352,24 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "balishrimp"
+  },
+  {
+   "id": "dish-20",
+   "cat": "c3",
+   "name": "Салат с манго-карри и креветками",
+   "variants": [
+    {
+     "p": 560,
+     "w": 250,
+     "kcal": 867,
+     "prot": 33,
+     "fat": 38,
+     "carb": 97
+    }
+   ],
+   "img": "saladmango"
   },
   {
    "id": "dish-22",
@@ -482,37 +384,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-23",
-   "cat": "c4",
-   "name": "Том ям рамен",
-   "variants": [
-    {
-     "p": 720,
-     "w": 570,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-24",
-   "cat": "c4",
-   "name": "Рамен с цыпленком",
-   "variants": [
-    {
-     "p": 540,
-     "w": 570,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "tomym"
   },
   {
    "id": "dish-25",
@@ -527,6 +400,10 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
+   ],
+   "img": "ramencow",
+   "badges": [
+    "hit"
    ]
   },
   {
@@ -542,7 +419,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "ramencream"
   },
   {
    "id": "dish-27",
@@ -557,7 +435,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "ramennuts"
   },
   {
    "id": "dish-28",
@@ -572,7 +451,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "bowlimbir"
   },
   {
    "id": "dish-29",
@@ -587,7 +467,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "bowlsalamon"
   },
   {
    "id": "dish-30",
@@ -602,37 +483,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-31",
-   "cat": "c5",
-   "name": "Пибимпаб с томленой говядиной",
-   "variants": [
-    {
-     "p": 690,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-32",
-   "cat": "c5",
-   "name": "Жареная креветка с соусом чили-ананас",
-   "variants": [
-    {
-     "p": 690,
-     "w": 340,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "pibimpab"
   },
   {
    "id": "dish-33",
@@ -647,37 +499,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-34",
-   "cat": "c6",
-   "name": "Вок с морепродуктами в соусе том ям",
-   "variants": [
-    {
-     "p": 670,
-     "w": 280,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-35",
-   "cat": "c6",
-   "name": "Соба с говядиной в перечном соусе",
-   "variants": [
-    {
-     "p": 650,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "bowltuna"
   },
   {
    "id": "dish-36",
@@ -692,7 +515,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "katsyudon"
   },
   {
    "id": "dish-37",
@@ -707,67 +531,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-38",
-   "cat": "c6",
-   "name": "Удон с морепродуктами в соусе тонкацу",
-   "variants": [
-    {
-     "p": 680,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-39",
-   "cat": "c6",
-   "name": "Пад тай с цыпленком",
-   "variants": [
-    {
-     "p": 590,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-40",
-   "cat": "c6",
-   "name": "Вок с гречневой лапшой и томленой уткой",
-   "variants": [
-    {
-     "p": 640,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-41",
-   "cat": "c6",
-   "name": "Яичная лапша с цыпленком в арахисовом соусе",
-   "variants": [
-    {
-     "p": 590,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "pugtaishrimp"
   },
   {
    "id": "dish-42",
@@ -782,7 +547,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "tokpokkikolbask"
   },
   {
    "id": "dish-43",
@@ -797,37 +563,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-44",
-   "cat": "c7",
-   "name": "Токпокки карбонара",
-   "variants": [
-    {
-     "p": 690,
-     "w": 280,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
-  },
-  {
-   "id": "dish-45",
-   "cat": "c8",
-   "name": "Жареный рис с курицей",
-   "variants": [
-    {
-     "p": 520,
-     "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "tokpokkishrimp"
   },
   {
    "id": "dish-46",
@@ -842,6 +579,10 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
+   ],
+   "img": "riceshrimp",
+   "badges": [
+    "hit"
    ]
   },
   {
@@ -857,22 +598,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-48",
-   "cat": "c8",
-   "name": "Жареный рис с томленой говядиной и древесными грибами",
-   "variants": [
-    {
-     "p": 740,
-     "w": 330,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "chikenkungpao"
   },
   {
    "id": "dish-49",
@@ -888,71 +615,8 @@ window.MENU={
      "carb": 97
     }
    ],
-   "sub": "Сытные"
-  },
-  {
-   "id": "dish-50",
-   "cat": "c9",
-   "name": "Вафля с креветками и ананасом",
-   "variants": [
-    {
-     "p": 490,
-     "w": 300,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "sub": "Сытные"
-  },
-  {
-   "id": "dish-51",
-   "cat": "c9",
-   "name": "Вафля с курицей и ореховым соусом",
-   "variants": [
-    {
-     "p": 420,
-     "w": 330,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "sub": "Сытные"
-  },
-  {
-   "id": "dish-52",
-   "cat": "c9",
-   "name": "Вафля с манго и сливочным кремом",
-   "variants": [
-    {
-     "p": 490,
-     "w": 260,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "sub": "Сладкие"
-  },
-  {
-   "id": "dish-53",
-   "cat": "c9",
-   "name": "Вафля с арахисом, бананом и шоколадом",
-   "variants": [
-    {
-     "p": 390,
-     "w": 300,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "sub": "Сладкие"
+   "sub": "Сытные",
+   "img": "bubblessalamon"
   },
   {
    "id": "dish-54",
@@ -968,7 +632,8 @@ window.MENU={
      "carb": 97
     }
    ],
-   "sub": "Сладкие"
+   "sub": "Сладкие",
+   "img": "bubblesdubai"
   },
   {
    "id": "dish-55",
@@ -984,7 +649,8 @@ window.MENU={
      "carb": 97
     }
    ],
-   "sub": "Сладкие"
+   "sub": "Сладкие",
+   "img": "bubblesstrewberry"
   },
   {
    "id": "dish-56",
@@ -999,7 +665,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "cheesecake"
   },
   {
    "id": "dish-57",
@@ -1024,7 +691,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "mooncake"
   },
   {
    "id": "dish-58",
@@ -1039,7 +707,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
+   ],
+   "img": "panacat"
   },
   {
    "id": "dish-59",
@@ -1054,22 +723,8 @@ window.MENU={
      "fat": 38,
      "carb": 97
     }
-   ]
-  },
-  {
-   "id": "dish-60",
-   "cat": "c10",
-   "name": "Мороженое пломбир",
-   "variants": [
-    {
-     "p": 150,
-     "w": 60,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ]
+   ],
+   "img": "moti"
   }
  ],
  "stories": [
@@ -1093,21 +748,15 @@ window.MENU={
      "img": "loyalty-1",
      "url": "https://injoy.getmeback.ru/wallet/frontend#/wallet/android",
      "label": "Получить карту"
-    },
-    {
-     "img": "loyalty-2"
     }
    ]
   },
   {
-   "name": "Новости",
+   "name": "6й Ланч Free",
    "cover": "news-1",
    "slides": [
     {
      "img": "news-1"
-    },
-    {
-     "img": "news-2"
     }
    ]
   }
