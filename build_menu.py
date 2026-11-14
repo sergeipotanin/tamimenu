@@ -104,6 +104,8 @@ for i, r in enumerate(ws.iter_rows(min_row=2, values_only=True), 2):
         sys.exit(1)
 
 order = [k for k in order if k not in hid]
+# категория, в которой все блюда скрыты, на сайте не показывается
+cats = [c for c in cats if any(dishes[k]["cat"] == c["id"] for k in order)]
 
 # ---- истории
 st = []
