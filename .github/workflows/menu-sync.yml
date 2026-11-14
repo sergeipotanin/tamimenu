@@ -1,4 +1,4 @@
-name: Обновление меню из Яндекс Диска
+name: Обновление меню из Google Таблицы
 
 on:
   schedule:
@@ -25,31 +25,26 @@ jobs:
       - name: Установить openpyxl
         run: pip install openpyxl
 
-      - name: Скачать таблицу с Яндекс Диска
+      - name: Скачать таблицу из Google
         env:
-          YA_LINK: ${{ vars.YA_LINK }}
+          SHEET_ID: ${{ vars.SHEET_ID }}
         run: |
-          if [ -z "$YA_LINK" ]; then
-            echo "ОШИБКА: переменная YA_LINK не задана (Settings → Secrets and variables → Actions → Variables)"; exit 1
+          if [ -z "$SHEET_ID" ]; then
+            echo "ОШИБКА: переменная SHEET_ID не задана (Settings → Secrets and variables → Actions → Variables)"; exit 1
           fi
           if [ ! -f build_menu.py ]; then
             echo "ОШИБКА: в корне репозитория нет файла build_menu.py"; exit 1
           fi
-          API="https://cloud-api.yandex.net/v1/disk/public/resources"
-          ask() {  # $1 = адрес API, $2 = поле с прямой ссылкой в ответе
-            for i in 1 2 3 4; do
-              RESP=$(curl -sG -A "Mozilla/5.0" -w "\n%{http_code}" "$1" --data-urlencode "public_key=$YA_LINK")
-              CODE=$(echo "$RESP" | tail -n1); BODY=$(echo "$RESP" | sed '$d')
-              if [ "$CODE" = "200" ]; then
-                echo "$BODY" | python3 -c "import sys,json;print(json.load(sys.stdin)['$2'])" && return 0
-              fi
-              echo "Попытка $i: Яндекс Диск ответил $CODE: $BODY" >&2
-              sleep 20
-            done
-            return 1
-          }
-          HREF=$(ask "$API/download" href) || HREF=$(ask "$API" file) || { echo "ОШИБКА: Яндекс Диск не отдал файл. Проверьте ссылку в переменной YA_LINK."; exit 1; }
-          curl -sfL -o menu.xlsx "$HREF" || { echo "ОШИБКА: не удалось скачать файл по ссылке"; exit 1; }
+          URL="https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx"
+          for i in 1 2 3; do
+            CODE=$(curl -sL -A "Mozilla/5.0" -o menu.xlsx -w "%{http_code}" "$URL")
+            if [ "$CODE" = "200" ] && [ "$(head -c2 menu.xlsx)" = "PK" ]; then break; fi
+            echo "Попытка $i: Google ответил $CODE, файл не похож на таблицу" >&2
+            rm -f menu.xlsx; sleep 15
+          done
+          if [ ! -f menu.xlsx ]; then
+            echo "ОШИБКА: Google не отдал таблицу. Проверьте SHEET_ID и доступ «Все, у кого есть ссылка» (Читатель)."; exit 1
+          fi
           ls -la menu.xlsx
 
       - name: Собрать menu.js
@@ -65,7 +60,7 @@ jobs:
             git config user.name "menu-bot"
             git config user.email "menu-bot@users.noreply.github.com"
             git add menu.js
-            git commit -m "Обновление меню из Яндекс Диска"
+            git commit -m "Обновление меню из Google Таблицы"
             git push
           else
             echo "Меню не изменилось"
