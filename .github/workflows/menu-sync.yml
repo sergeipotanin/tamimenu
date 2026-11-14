@@ -1,1 +1,47 @@
+name: Обновление меню из Яндекс Диска
 
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # каждые 30 минут
+  workflow_dispatch:          # и кнопка «Run workflow» вручную
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Установить openpyxl
+        run: pip install openpyxl
+
+      - name: Скачать таблицу с Яндекс Диска
+        env:
+          YA_LINK: ${{ vars.YA_LINK }}
+        run: |
+          HREF=$(curl -sfG "https://cloud-api.yandex.net/v1/disk/public/resources/download" --data-urlencode "public_key=$YA_LINK" | python3 -c "import sys,json;print(json.load(sys.stdin)['href'])")
+          curl -sfL -o menu.xlsx "$HREF"
+          ls -la menu.xlsx
+
+      - name: Собрать menu.js
+        run: |
+          python3 build_menu.py menu.xlsx menu.new.js
+          test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1
+          mv menu.new.js menu.js
+
+      - name: Сохранить, если меню изменилось
+        run: |
+          rm -f menu.xlsx
+          if ! git diff --quiet menu.js; then
+            git config user.name "menu-bot"
+            git config user.email "menu-bot@users.noreply.github.com"
+            git add menu.js
+            git commit -m "Обновление меню из Яндекс Диска"
+            git push
+          fi
