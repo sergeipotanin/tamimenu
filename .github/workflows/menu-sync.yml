@@ -35,13 +35,20 @@ jobs:
           if [ ! -f build_menu.py ]; then
             echo "ОШИБКА: в корне репозитория нет файла build_menu.py"; exit 1
           fi
-          RESP=$(curl -sG -w "\n%{http_code}" "https://cloud-api.yandex.net/v1/disk/public/resources/download" --data-urlencode "public_key=$YA_LINK")
-          CODE=$(echo "$RESP" | tail -n1)
-          BODY=$(echo "$RESP" | sed '$d')
-          if [ "$CODE" != "200" ]; then
-            echo "ОШИБКА: Яндекс Диск ответил $CODE: $BODY"; exit 1
-          fi
-          HREF=$(echo "$BODY" | python3 -c "import sys,json;print(json.load(sys.stdin)['href'])")
+          API="https://cloud-api.yandex.net/v1/disk/public/resources"
+          ask() {  # $1 = адрес API, $2 = поле с прямой ссылкой в ответе
+            for i in 1 2 3 4; do
+              RESP=$(curl -sG -A "Mozilla/5.0" -w "\n%{http_code}" "$1" --data-urlencode "public_key=$YA_LINK")
+              CODE=$(echo "$RESP" | tail -n1); BODY=$(echo "$RESP" | sed '$d')
+              if [ "$CODE" = "200" ]; then
+                echo "$BODY" | python3 -c "import sys,json;print(json.load(sys.stdin)['$2'])" && return 0
+              fi
+              echo "Попытка $i: Яндекс Диск ответил $CODE: $BODY" >&2
+              sleep 20
+            done
+            return 1
+          }
+          HREF=$(ask "$API/download" href) || HREF=$(ask "$API" file) || { echo "ОШИБКА: Яндекс Диск не отдал файл. Проверьте ссылку в переменной YA_LINK."; exit 1; }
           curl -sfL -o menu.xlsx "$HREF" || { echo "ОШИБКА: не удалось скачать файл по ссылке"; exit 1; }
           ls -la menu.xlsx
 
