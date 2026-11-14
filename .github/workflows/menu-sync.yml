@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -25,14 +29,26 @@ jobs:
         env:
           YA_LINK: ${{ vars.YA_LINK }}
         run: |
-          HREF=$(curl -sfG "https://cloud-api.yandex.net/v1/disk/public/resources/download" --data-urlencode "public_key=$YA_LINK" | python3 -c "import sys,json;print(json.load(sys.stdin)['href'])")
-          curl -sfL -o menu.xlsx "$HREF"
+          if [ -z "$YA_LINK" ]; then
+            echo "ОШИБКА: переменная YA_LINK не задана (Settings → Secrets and variables → Actions → Variables)"; exit 1
+          fi
+          if [ ! -f build_menu.py ]; then
+            echo "ОШИБКА: в корне репозитория нет файла build_menu.py"; exit 1
+          fi
+          RESP=$(curl -sG -w "\n%{http_code}" "https://cloud-api.yandex.net/v1/disk/public/resources/download" --data-urlencode "public_key=$YA_LINK")
+          CODE=$(echo "$RESP" | tail -n1)
+          BODY=$(echo "$RESP" | sed '$d')
+          if [ "$CODE" != "200" ]; then
+            echo "ОШИБКА: Яндекс Диск ответил $CODE: $BODY"; exit 1
+          fi
+          HREF=$(echo "$BODY" | python3 -c "import sys,json;print(json.load(sys.stdin)['href'])")
+          curl -sfL -o menu.xlsx "$HREF" || { echo "ОШИБКА: не удалось скачать файл по ссылке"; exit 1; }
           ls -la menu.xlsx
 
       - name: Собрать menu.js
         run: |
           python3 build_menu.py menu.xlsx menu.new.js
-          test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1
+          test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1 || { echo "ОШИБКА: в таблице не нашлось ни одного блюда"; exit 1; }
           mv menu.new.js menu.js
 
       - name: Сохранить, если меню изменилось
@@ -44,4 +60,6 @@ jobs:
             git add menu.js
             git commit -m "Обновление меню из Яндекс Диска"
             git push
+          else
+            echo "Меню не изменилось"
           fi
