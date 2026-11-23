@@ -59,10 +59,10 @@ window.MENU={
     {
      "p": 650,
      "w": 150,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 211,
+     "prot": 24,
+     "fat": 11,
+     "carb": 4
     }
    ],
    "img": "tataki",
@@ -82,10 +82,10 @@ window.MENU={
     {
      "p": 650,
      "w": 180,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 476,
+     "prot": 19,
+     "fat": 16,
+     "carb": 64
     }
    ],
    "img": "takosushi",
@@ -103,31 +103,11 @@ window.MENU={
      "p": 200,
      "label": "С тунцом",
      "w": 70,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97,
+     "kcal": 89,
+     "prot": 6,
+     "fat": 5,
+     "carb": 5,
      "img": "tuna"
-    },
-    {
-     "p": 200,
-     "label": "С креветкой",
-     "w": 70,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97,
-     "img": "shrimp"
-    },
-    {
-     "p": 260,
-     "label": "С лососем",
-     "w": 70,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97,
-     "img": "salomon"
     }
    ],
    "img": "handroll",
@@ -137,17 +117,67 @@ window.MENU={
    }
   },
   {
+   "id": "dish-8",
+   "cat": "c1",
+   "name": null,
+   "variants": [
+    {
+     "p": 200,
+     "label": "С креветкой",
+     "w": 70,
+     "kcal": 107,
+     "prot": 5,
+     "fat": 7,
+     "carb": 6,
+     "img": "shrimp"
+    }
+   ]
+  },
+  {
    "id": "dish-9",
+   "cat": "c1",
+   "name": null,
+   "variants": [
+    {
+     "p": 260,
+     "label": "С лососем",
+     "w": 70,
+     "kcal": 90,
+     "prot": 4,
+     "fat": 6,
+     "carb": 5,
+     "img": "salomon"
+    }
+   ]
+  },
+  {
+   "id": "dish-11",
    "cat": "c1",
    "name": "Батат фри",
    "variants": [
     {
      "p": 350,
      "w": 140,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 352,
+     "prot": 3,
+     "fat": 12,
+     "carb": 58
+    },
+    {
+     "p": 390,
+     "label": "4 шт",
+     "kcal": 479,
+     "prot": 18,
+     "fat": 15,
+     "carb": 68
+    },
+    {
+     "p": 660,
+     "label": "8 шт",
+     "kcal": 958,
+     "prot": 36,
+     "fat": 30,
+     "carb": 136
     }
    ],
    "img": "batat",
@@ -157,73 +187,44 @@ window.MENU={
    }
   },
   {
-   "id": "dish-10",
+   "id": "dish-12",
    "cat": "c1",
    "name": "Куриный поп-корн",
    "variants": [
     {
      "p": 470,
      "w": 200,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "img": "popcorn",
-   "note": "Можем сделать поострее",
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
-   "id": "dish-11",
-   "cat": "c2",
-   "name": "Димсамы с креветкой и белой рыбой в соусе Том ям",
-   "variants": [
-    {
-     "p": 390,
-     "label": "4 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 503,
+     "prot": 25,
+     "fat": 19,
+     "carb": 58
     },
-    {
-     "p": 660,
-     "label": "8 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
-    }
-   ],
-   "img": "dimsams"
-  },
-  {
-   "id": "dish-12",
-   "cat": "c2",
-   "name": "Дамплинги с говядиной и свининой",
-   "variants": [
     {
      "p": 390,
      "label": "5 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 520,
+     "prot": 16,
+     "fat": 24,
+     "carb": 60
     },
     {
      "p": 590,
      "label": "10 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 1040,
+     "prot": 32,
+     "fat": 48,
+     "carb": 120
     }
    ],
-   "img": "dampling"
+   "img": "popcorn",
+   "note": "Можем сделать поострее",
+   "badges": [
+    "hit"
+   ],
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-13",
@@ -233,18 +234,18 @@ window.MENU={
     {
      "p": 390,
      "label": "5 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 524,
+     "prot": 18,
+     "fat": 24,
+     "carb": 59
     },
     {
      "p": 630,
      "label": "10 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 1048,
+     "prot": 36,
+     "fat": 48,
+     "carb": 118
     }
    ],
    "img": "votons"
@@ -257,18 +258,18 @@ window.MENU={
     {
      "p": 370,
      "label": "5 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 527,
+     "prot": 20,
+     "fat": 23,
+     "carb": 60
     },
     {
      "p": 570,
      "label": "10 шт",
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 1054,
+     "prot": 40,
+     "fat": 46,
+     "carb": 120
     }
    ],
    "img": "gizda"
@@ -281,10 +282,10 @@ window.MENU={
     {
      "p": 90,
      "w": 50,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 228,
+     "prot": 1,
+     "fat": 20,
+     "carb": 11
     }
    ],
    "sub": "Соусы к пельменям",
@@ -298,10 +299,10 @@ window.MENU={
     {
      "p": 90,
      "w": 50,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 51,
+     "prot": 1,
+     "fat": 3,
+     "carb": 5
     }
    ],
    "sub": "Соусы к пельменям",
@@ -315,13 +316,16 @@ window.MENU={
     {
      "p": 490,
      "w": 250,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 386,
+     "prot": 7,
+     "fat": 26,
+     "carb": 31
     }
    ],
-   "img": "baklagan"
+   "img": "baklagan",
+   "badges": [
+    "hit"
+   ]
   },
   {
    "id": "dish-18",
@@ -331,10 +335,10 @@ window.MENU={
     {
      "p": 580,
      "w": 240,
-     "kcal": 867,
-     "prot": 33,
+     "kcal": 574,
+     "prot": 23,
      "fat": 38,
-     "carb": 97
+     "carb": 35
     }
    ],
    "img": "balichiken"
@@ -347,10 +351,10 @@ window.MENU={
     {
      "p": 620,
      "w": 210,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 419,
+     "prot": 15,
+     "fat": 27,
+     "carb": 29
     }
    ],
    "img": "balishrimp"
@@ -363,10 +367,10 @@ window.MENU={
     {
      "p": 560,
      "w": 250,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 163,
+     "prot": 6,
+     "fat": 11,
+     "carb": 10
     }
    ],
    "img": "saladmango"
@@ -379,10 +383,10 @@ window.MENU={
     {
      "p": 720,
      "w": 670,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 520,
+     "prot": 28,
+     "fat": 24,
+     "carb": 48
     }
    ],
    "img": "tomym"
@@ -395,10 +399,10 @@ window.MENU={
     {
      "p": 720,
      "w": 570,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 700,
+     "prot": 44,
+     "fat": 40,
+     "carb": 41
     }
    ],
    "img": "ramencow",
@@ -414,10 +418,10 @@ window.MENU={
     {
      "p": 640,
      "w": 570,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 369,
+     "prot": 16,
+     "fat": 21,
+     "carb": 29
     }
    ],
    "img": "ramencream"
@@ -430,10 +434,10 @@ window.MENU={
     {
      "p": 720,
      "w": 550,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 532,
+     "prot": 26,
+     "fat": 32,
+     "carb": 35
     }
    ],
    "img": "ramennuts"
@@ -446,10 +450,10 @@ window.MENU={
     {
      "p": 630,
      "w": 330,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 462,
+     "prot": 12,
+     "fat": 26,
+     "carb": 45
     }
    ],
    "img": "bowlimbir"
@@ -462,10 +466,10 @@ window.MENU={
     {
      "p": 690,
      "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 452,
+     "prot": 12,
+     "fat": 24,
+     "carb": 47
     }
    ],
    "img": "bowlsalamon"
@@ -478,10 +482,10 @@ window.MENU={
     {
      "p": 530,
      "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 361,
+     "prot": 18,
+     "fat": 17,
+     "carb": 34
     }
    ],
    "img": "pibimpab"
@@ -494,10 +498,10 @@ window.MENU={
     {
      "p": 690,
      "w": 360,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 437,
+     "prot": 16,
+     "fat": 21,
+     "carb": 46
     }
    ],
    "img": "bowltuna"
@@ -510,10 +514,10 @@ window.MENU={
     {
      "p": 590,
      "w": 330,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 400,
+     "prot": 17,
+     "fat": 20,
+     "carb": 38
     }
    ],
    "img": "katsyudon"
@@ -526,10 +530,10 @@ window.MENU={
     {
      "p": 740,
      "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 413,
+     "prot": 15,
+     "fat": 25,
+     "carb": 32
     }
    ],
    "img": "pugtaishrimp"
@@ -542,10 +546,10 @@ window.MENU={
     {
      "p": 720,
      "w": 280,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 530,
+     "prot": 18,
+     "fat": 42,
+     "carb": 20
     }
    ],
    "img": "tokpokkikolbask"
@@ -558,10 +562,10 @@ window.MENU={
     {
      "p": 770,
      "w": 330,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 355,
+     "prot": 17,
+     "fat": 23,
+     "carb": 20
     }
    ],
    "img": "tokpokkishrimp"
@@ -574,10 +578,10 @@ window.MENU={
     {
      "p": 680,
      "w": 350,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 622,
+     "prot": 13,
+     "fat": 46,
+     "carb": 39
     }
    ],
    "img": "riceshrimp",
@@ -593,10 +597,10 @@ window.MENU={
     {
      "p": 520,
      "w": 380,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 615,
+     "prot": 27,
+     "fat": 35,
+     "carb": 48
     }
    ],
    "img": "chikenkungpao"
@@ -609,14 +613,17 @@ window.MENU={
     {
      "p": 560,
      "w": 280,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 684,
+     "prot": 17,
+     "fat": 40,
+     "carb": 64
     }
    ],
    "sub": "Сытные",
-   "img": "bubblessalamon"
+   "img": "bubblessalamon",
+   "badges": [
+    "hit"
+   ]
   },
   {
    "id": "dish-54",
@@ -626,14 +633,17 @@ window.MENU={
     {
      "p": 520,
      "w": 280,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 945,
+     "prot": 12,
+     "fat": 33,
+     "carb": 150
     }
    ],
    "sub": "Сладкие",
-   "img": "bubblesdubai"
+   "img": "bubblesdubai",
+   "badges": [
+    "hit"
+   ]
   },
   {
    "id": "dish-55",
@@ -643,10 +653,10 @@ window.MENU={
     {
      "p": 460,
      "w": 250,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 476,
+     "prot": 7,
+     "fat": 16,
+     "carb": 76
     }
    ],
    "sub": "Сладкие",
@@ -660,10 +670,10 @@ window.MENU={
     {
      "p": 390,
      "w": 150,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 537,
+     "prot": 6,
+     "fat": 37,
+     "carb": 45
     }
    ],
    "img": "cheesecake"
@@ -677,19 +687,19 @@ window.MENU={
      "p": 420,
      "label": "Вишнёвый",
      "w": 150,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 492,
+     "prot": 8,
+     "fat": 35,
+     "carb": 36
     },
     {
      "p": 420,
      "label": "Шоколадный",
      "w": 150,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 402,
+     "prot": 6,
+     "fat": 26,
+     "carb": 36
     }
    ],
    "img": "mooncake"
@@ -702,10 +712,10 @@ window.MENU={
     {
      "p": 370,
      "w": 150,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 261,
+     "prot": 6,
+     "fat": 9,
+     "carb": 39
     }
    ],
    "img": "panacat"
@@ -718,10 +728,10 @@ window.MENU={
     {
      "p": 290,
      "w": 70,
-     "kcal": 867,
-     "prot": 33,
-     "fat": 38,
-     "carb": 97
+     "kcal": 194,
+     "prot": 3,
+     "fat": 10,
+     "carb": 23
     }
    ],
    "img": "moti"
