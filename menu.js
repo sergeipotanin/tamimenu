@@ -77,7 +77,7 @@ window.MENU={
   {
    "id": "dish-5",
    "cat": "c1",
-   "name": "Тако суши сет",
+   "name": "ТАКО СУШИ ТЕСТ 123",
    "variants": [
     {
      "p": 650,
