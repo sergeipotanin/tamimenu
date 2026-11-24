@@ -1,35 +1,3 @@
-# Сборка menu.js из Excel-таблицы меню.
-# Использование: python3 build_menu.py Tami_menu.xlsx menu.js
-import json, sys
-from openpyxl import load_workbook
-
-src, out = sys.argv[1], sys.argv[2]
-YES = ("да", "yes", "1")
-
-
-def s(v):
-    return None if v is None or str(v).strip() == "" else str(v).strip()
-
-
-def num(v):
-    if v is None or str(v).strip() == "":
-        return None
-    f = float(v)
-    return int(f) if f == int(f) else f
-
-
-def yes(v):
-    return (s(v) or "").lower() in YES
-
-
-wb = load_workbook(src, data_only=True)
-ws, cs = wb["Меню"], wb["Категории"]
-
-# ---- категории
-cats, ids = [], {}
-for i, r in enumerate(cs.iter_rows(min_row=2, values_only=True)):
-    if not s(r[0]):
-        continue
     c = dict(id="c%d" % (i + 1), name=s(r[0]))
     subs = [x.strip() for x in (s(r[1]) or "").split(";") if x.strip()]
     if subs:
@@ -48,6 +16,8 @@ cur = [None]
 def process(r):
     global last
     r = list(r) + [None] * (24 - len(r))   # на случай, если в таблице нет последних колонок
+    if not any(s(x) for x in r):
+        return  # полностью пустые строки таблицы пропускаем
     raw = r[0]
     if isinstance(raw, str) and raw.strip().lower() in YES:
         # «да» случайно попало в колонку «№»: считаем пометкой «Скрыть»
@@ -56,10 +26,17 @@ def process(r):
     else:
         no = num(raw)
     if not s(r[3]) and not s(r[1]):
-        # строка без названия и категории — ещё один вариант предыдущего блюда (даже если номер другой)
+        # Строка варианта обязана повторять номер предыдущего блюда.
+        # Иначе не прикрепляем её к предыдущему блюду случайно.
         if cur[0] is None:
             raise ValueError("строка без названия и категории стоит перед первым блюдом")
-        no = cur[0]
+        if no is None:
+            raise ValueError("у строки варианта не указан № блюда")
+        if no != cur[0]:
+            raise ValueError(
+                "строка варианта должна повторять № предыдущего блюда "
+                "(указан № %s, предыдущее блюдо № %s)" % (no, cur[0])
+            )
     if no is None:
         return
     last = no
