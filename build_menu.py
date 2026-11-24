@@ -42,6 +42,7 @@ for i, r in enumerate(cs.iter_rows(min_row=2, values_only=True)):
 # ---- блюда
 dishes, order, hid = {}, [], set()
 last = 0
+cur = [None]
 
 
 def process(r):
@@ -54,10 +55,17 @@ def process(r):
         hid.add(no)
     else:
         no = num(raw)
+    if not s(r[3]) and not s(r[1]):
+        # строка без названия и категории — ещё один вариант предыдущего блюда (даже если номер другой)
+        if cur[0] is None:
+            raise ValueError("строка без названия и категории стоит перед первым блюдом")
+        no = cur[0]
     if no is None:
         return
     last = no
     if no not in dishes:
+        if not s(r[3]):
+            raise ValueError("у блюда нет названия")
         b = []
         for x in (s(r[15]) or "").replace(";", ",").split(","):
             x = x.strip().lower()
@@ -83,6 +91,7 @@ def process(r):
             hid.add(no)
         dishes[no] = d
         order.append(no)
+        cur[0] = no
     v = dict(p=num(r[6]))
     if s(r[4]):
         v["label"] = s(r[4])

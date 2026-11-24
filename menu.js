@@ -108,19 +108,7 @@ window.MENU={
      "fat": 5,
      "carb": 5,
      "img": "tuna"
-    }
-   ],
-   "img": "handroll",
-   "rec": {
-    "t": "К этому блюду рекомендуем вино",
-    "i": "wine"
-   }
-  },
-  {
-   "id": "dish-8",
-   "cat": "c1",
-   "name": null,
-   "variants": [
+    },
     {
      "p": 200,
      "label": "С креветкой",
@@ -130,14 +118,7 @@ window.MENU={
      "fat": 7,
      "carb": 6,
      "img": "shrimp"
-    }
-   ]
-  },
-  {
-   "id": "dish-9",
-   "cat": "c1",
-   "name": null,
-   "variants": [
+    },
     {
      "p": 260,
      "label": "С лососем",
@@ -148,7 +129,12 @@ window.MENU={
      "carb": 5,
      "img": "salomon"
     }
-   ]
+   ],
+   "img": "handroll",
+   "rec": {
+    "t": "К этому блюду рекомендуем вино",
+    "i": "wine"
+   }
   },
   {
    "id": "dish-11",
