@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 defaults:
   run:
@@ -53,15 +54,23 @@ jobs:
           test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1 || { echo "ОШИБКА: в таблице не нашлось ни одного блюда"; exit 1; }
           mv menu.new.js menu.js
 
-      - name: Сохранить, если меню изменилось
+      - name: Сохранить, если меню изменилось, и обновить сайт
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           rm -f menu.xlsx
+          CHANGED=0
           if ! git diff --quiet menu.js; then
             git config user.name "menu-bot"
             git config user.email "menu-bot@users.noreply.github.com"
             git add menu.js
             git commit -m "Обновление меню из Google Таблицы"
             git push
+            CHANGED=1
           else
             echo "Меню не изменилось"
+          fi
+          # просим GitHub заново опубликовать сайт (при изменениях и при запуске вручную)
+          if [ "$CHANGED" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" && echo "Публикация сайта запрошена" || echo "Не удалось запросить публикацию (сайт обновится сам по коммиту)"
           fi
