@@ -1,9 +1,10 @@
-name: Обновление меню из Google Таблицы
+
+name: Обновление меню из Яндекс Диска
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # каждые 30 минут
-  workflow_dispatch:          # и кнопка «Run workflow» вручную
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -26,51 +27,74 @@ jobs:
       - name: Установить openpyxl
         run: pip install openpyxl
 
-      - name: Скачать таблицу из Google
+      - name: Скачать таблицу из Яндекс Диска
         env:
-          SHEET_ID: ${{ vars.SHEET_ID }}
+          YANDEX_PUBLIC_URL: ${{ vars.YANDEX_PUBLIC_URL }}
         run: |
-          if [ -z "$SHEET_ID" ]; then
-            echo "ОШИБКА: переменная SHEET_ID не задана (Settings → Secrets and variables → Actions → Variables)"; exit 1
+          set -euo pipefail
+
+          if [ -z "${YANDEX_PUBLIC_URL:-}" ]; then
+            echo "ОШИБКА: переменная YANDEX_PUBLIC_URL не задана"
+            exit 1
           fi
-          if [ ! -f build_menu.py ]; then
-            echo "ОШИБКА: в корне репозитория нет файла build_menu.py"; exit 1
-          fi
-          URL="https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=xlsx"
+
+          ENCODED_URL=$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["YANDEX_PUBLIC_URL"], safe=""))')
+          API_URL="https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=${ENCODED_URL}"
+
+          DOWNLOADED=0
           for i in 1 2 3; do
-            CODE=$(curl -sL -A "Mozilla/5.0" -o menu.xlsx -w "%{http_code}" "$URL")
-            if [ "$CODE" = "200" ] && [ "$(head -c2 menu.xlsx)" = "PK" ]; then break; fi
-            echo "Попытка $i: Google ответил $CODE, файл не похож на таблицу" >&2
-            rm -f menu.xlsx; sleep 15
+            echo "Запрос ссылки Яндекс Диска, попытка $i"
+            API_RESPONSE=$(curl -fsSL "$API_URL" || true)
+            DOWNLOAD_URL=$(printf '%s' "$API_RESPONSE" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("href",""))' 2>/dev/null || true)
+
+            if [ -n "$DOWNLOAD_URL" ]; then
+              CODE=$(curl -sL -A "Mozilla/5.0" -o menu.xlsx -w "%{http_code}" "$DOWNLOAD_URL" || true)
+              if [ "$CODE" = "200" ] && [ "$(head -c2 menu.xlsx)" = "PK" ]; then
+                DOWNLOADED=1
+                break
+              fi
+              echo "Файл не скачан корректно (HTTP $CODE)"
+            else
+              echo "Яндекс не вернул ссылку скачивания"
+              printf '%s\n' "$API_RESPONSE" | head -c 1000
+            fi
+
+            rm -f menu.xlsx
+            sleep 15
           done
-          if [ ! -f menu.xlsx ]; then
-            echo "ОШИБКА: Google не отдал таблицу. Проверьте SHEET_ID и доступ «Все, у кого есть ссылка» (Читатель)."; exit 1
+
+          if [ "$DOWNLOADED" != "1" ]; then
+            echo "ОШИБКА: не удалось скачать Excel с Яндекс Диска"
+            exit 1
           fi
-          ls -la menu.xlsx
+
+          echo "Excel успешно скачан"
+          ls -lh menu.xlsx
 
       - name: Собрать menu.js
         run: |
           python3 build_menu.py menu.xlsx menu.new.js
-          test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1 || { echo "ОШИБКА: в таблице не нашлось ни одного блюда"; exit 1; }
+          test "$(grep -c '"id": "dish-' menu.new.js)" -ge 1
           mv menu.new.js menu.js
 
-      - name: Сохранить, если меню изменилось, и обновить сайт
+      - name: Сохранить изменения и обновить сайт
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           rm -f menu.xlsx
           CHANGED=0
+
           if ! git diff --quiet menu.js; then
             git config user.name "menu-bot"
             git config user.email "menu-bot@users.noreply.github.com"
             git add menu.js
-            git commit -m "Обновление меню из Google Таблицы"
+            git commit -m "Обновление меню из Яндекс Диска"
             git push
             CHANGED=1
           else
             echo "Меню не изменилось"
           fi
-          # просим GitHub заново опубликовать сайт (при изменениях и при запуске вручную)
+
           if [ "$CHANGED" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            gh api -X POST "repos/${{ github.repository }}/pages/builds" && echo "Публикация сайта запрошена" || echo "Не удалось запросить публикацию (сайт обновится сам по коммиту)"
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Сайт обновится автоматически"
           fi
