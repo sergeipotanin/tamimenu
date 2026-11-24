@@ -159,7 +159,7 @@ footer a{color:var(--milk)}footer p{opacity:.9}
 <button id="obar"></button>
 <div id="ord" role="dialog" aria-modal="true"></div>
 <div id="story" role="dialog" aria-modal="true"></div>
-<script src="menu.js"></script>
+<script>document.write('<script src="menu.js?v=' + Date.now() + '"><\\/script>');</script>
 <script>
 (function(){
 var M=window.MENU;M.dishes=(M.dishes||[]).filter(function(d){return d&&d.name&&d.variants&&d.variants.length});var $=function(s){return document.querySelector(s)};
