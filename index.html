@@ -88,6 +88,7 @@ h3{font-size:16px;font-weight:600;color:var(--mid);margin:24px 0 12px}.cn{margin
 .wl{padding:14px 0;border-bottom:1px solid rgba(57,54,55,.15);display:flex;gap:14px;align-items:baseline;font-size:24px;line-height:1.25;font-weight:600}.wl i{font-style:normal;color:var(--soft);min-width:34px}.wl span{flex:1}.wl em{font-style:normal;color:var(--teal);white-space:nowrap}
 .wt{position:sticky;bottom:0;background:var(--milk);padding:14px 0 calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:baseline;font-size:20px;border-top:2px solid var(--teal);margin-top:10px}.wt b{font-size:30px}
 .wb{color:var(--teal);font-weight:600;font-size:15px;padding:6px 0 10px}
+.wact{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.wact button{padding:13px 10px;border:1.5px solid var(--teal);border-radius:14px;color:var(--teal);font-size:14px;font-weight:600}.wact button:first-child{background:var(--teal);color:var(--milk)}.wstatus{min-height:18px;margin-top:8px;text-align:center;color:var(--mid);font-size:12px}
 .stories{position:relative;z-index:1;background:var(--milk);padding:20px 0 14px;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .sr{display:flex;align-items:flex-start;gap:14px;overflow-x:auto;padding:0 16px;scrollbar-width:none}.sr::-webkit-scrollbar{display:none}
 .st{flex:none;width:76px;padding:0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}.ring{display:block;width:72px;height:72px;margin:0 auto;border-radius:50%;padding:3px;background:linear-gradient(135deg,#5abf86,#19656d)}.ring i{display:block;width:100%;height:100%;border-radius:50%;border:3px solid var(--milk);background:center/cover}.st.seen .ring{background:#cfc8b6}
@@ -237,22 +238,22 @@ function show(d){
   sheet.innerHTML='<div class="top">'+top+'<div class="grab"></div><button class="x" aria-label="Закрыть">✕</button></div><div class="body"><h1>'+words(d.name)+"</h1>"+
     (L?'<div class="vs">'+vs.map(function(v){return"<button>"+v.label+"<small>"+fmt(v.p)+"₽</small></button>"}).join("")+"</div>":"")+
     '<div class="info"></div><div class="kb"></div><p class="al">Если у вас есть аллергия на какой-либо продукт, пожалуйста, предупредите вашего официанта.</p>'+(d.desc?'<p class="desc">'+d.desc+"</p>":"")+(d.note?'<p class="dn">'+d.note+"</p>":"")+(d.rec?'<div class="rec">'+(RI[d.rec.i]||RI.def)+"<span>"+d.rec.t+"</span></div>":"")+(d.soldout?"":'<div class="ab"><button class="big addb">Добавить в список</button></div>')+"</div>";
-  var car=sheet.querySelector(".car"),dots=sheet.querySelectorAll(".dots i"),sync=sl.length>1&&sl.length===vs.length;
+  var car=sheet.querySelector(".car"),dots=sheet.querySelectorAll(".dots i"),sync=sl.length>1&&sl.length===vs.length,ab=sheet.querySelector(".addb");
   function draw(){var v=vs[vi];
     sheet.querySelector(".info").innerHTML="<span>"+vw(v)+'</span><span class="p">'+fmt(v.p)+"₽</span>";
     sheet.querySelector(".kb").innerHTML=v.kcal?"<div><b>"+num(v.kcal)+"</b>ккал</div><div><b>"+num(v.prot)+"г</b>белки</div><div><b>"+num(v.fat)+"г</b>жиры</div><div><b>"+num(v.carb)+"г</b>углеводы</div>":"";
     sheet.querySelectorAll(".vs button").forEach(function(b,i){b.classList.toggle("on",i===vi)});
-    dots.forEach(function(x,i){x.classList.toggle("on",i===vi)})}
+    dots.forEach(function(x,i){x.classList.toggle("on",i===vi)});if(ab){var added=hasItem(d.id,vi);ab.disabled=added;ab.textContent=added?"Уже в списке ✓":"Добавить в список"}}
   sheet.querySelectorAll(".vs button").forEach(function(b,i){b.onclick=function(){vi=i;draw();if(sync)car.scrollTo({left:car.clientWidth*i,behavior:"smooth"})}});
   if(sync){var tm;car.addEventListener("scroll",function(){clearTimeout(tm);tm=setTimeout(function(){var i=Math.round(car.scrollLeft/car.clientWidth);if(i!==vi&&i>=0&&i<vs.length){vi=i;draw()}},80)})}
   sheet.querySelector(".x").onclick=close;draw();
-  var ab=sheet.querySelector(".addb");if(ab)ab.onclick=function(){addItem(d.id,vi);ab.textContent="Добавлено ✓ · в списке: "+cnt();setTimeout(function(){ab.textContent="Добавить в список"},1500)};
+  if(ab)ab.onclick=function(){if(hasItem(d.id,vi))return;addItem(d.id,vi);draw()};
   sheet.classList.add("open");sheet.scrollTop=0;sheet.style.transform="";document.body.classList.add("lock")}
 function hide(){sheet.classList.remove("open");document.body.classList.remove("lock")}
 function close(){hide();if(location.hash)history.replaceState(null,"",location.pathname+location.search)}
 function route(){var h=location.hash.slice(1),d=dishes[h];if(d)show(d);else hide();if(h==="order")openO();else closeO()}
 menu.addEventListener("click",function(e){var c=e.target.closest(".card");if(!c)return;var a=e.target.closest(".add");
-  if(a){var d=dishes[c.dataset.id];if(d.variants.length>1)location.hash=d.id;else{addItem(d.id,0);a.classList.add("ok");a.textContent="✓";setTimeout(function(){a.classList.remove("ok");a.textContent="+"},900)}return}
+  if(a){var d=dishes[c.dataset.id];if(d.variants.length>1)location.hash=d.id;else if(!hasItem(d.id,0))addItem(d.id,0);return}
   location.hash=c.dataset.id});
 /* order list */
 var KEY="tami-order",order=[],ob=$("#obar"),ord=$("#ord");
@@ -262,16 +263,22 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(order))}catch(e){}}
 function ov(o){return dishes[o.id].variants[o.vi]}
 function cnt(){return order.reduce(function(a,o){return a+o.q},0)}
 function tot(){return order.reduce(function(a,o){return a+o.q*ov(o).p},0)}
-function bar(){var c=cnt();ob.classList.toggle("on",c>0);ob.textContent="Мой заказ · "+c+" · "+fmt(tot())+"₽"}
-function addItem(id,vi){var f=null;order.forEach(function(o){if(o.id===id&&o.vi===vi)f=o});if(f)f.q++;else order.push({id:id,vi:vi,q:1});save();bar()}
+function hasItem(id,vi){return order.some(function(o){return o.id===id&&o.vi===vi&&o.q>0})}
+function syncCardButtons(){document.querySelectorAll(".card").forEach(function(c){var d=dishes[c.dataset.id],a=c.querySelector(".add");if(!d||!a)return;var added=d.variants.length===1?hasItem(d.id,0):order.some(function(o){return o.id===d.id&&o.q>0});a.classList.toggle("ok",added);a.textContent=added?"✓":"+";a.setAttribute("aria-label",added?"Уже в списке":"Добавить в список")})}
+function bar(){var c=cnt();ob.classList.toggle("on",c>0);ob.textContent="Мой заказ · "+c+" · "+fmt(tot())+"₽";syncCardButtons()}
+function addItem(id,vi){if(hasItem(id,vi))return;order.push({id:id,vi:vi,q:1});save();bar()}
 function oname(o){var d=dishes[o.id],v=ov(o);return words(d.name)+(d.variants.length>1&&v.label?" · "+v.label:"")}
 var DES=(M.categories.filter(function(c){return c.name==="Десерты"})[0]||{}).id,PEL=(M.categories.filter(function(c){return c.name==="Пельмени"})[0]||{}).id,SAU="Соусы к пельменям";
 function goSau(){var h=[].filter.call(document.querySelectorAll("h3"),function(x){return x.textContent===SAU})[0];if(h)window.scrollTo({top:h.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-8,behavior:"smooth"})}
 function thumb(o){var d=dishes[o.id],v=ov(o),im=v.img||d.img;return im?'<div class="th" style="background-image:url(images/'+im+'.webp)"></div>':'<div class="th nt"><i></i></div>'}
 function goDes(){var e=document.getElementById(DES);if(e)window.scrollTo({top:e.getBoundingClientRect().top+window.scrollY-nav.offsetHeight+1,behavior:"smooth"})}
+function orderText(){var lines=["МОЙ СПИСОК — ТАМИ",""];order.forEach(function(o,i){lines.push((i+1)+". "+oname(o)+" — "+o.q+" шт. — "+fmt(o.q*ov(o).p)+" ₽")});lines.push("","Итого: "+fmt(tot())+" ₽");return lines.join("\n")}
+function copyText(text,done){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(function(){copyFallback(text,done)})}else copyFallback(text,done)}
+function copyFallback(text,done){var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);if(ok)done();else alert("Не удалось скопировать автоматически. Попробуйте скопировать список вручную.")}
+function setShareStatus(message){var s=ord.querySelector(".wstatus");if(s)s.textContent=message}
 function rord(){var h;
   if(!order.length)h='<div class="oi"><div class="oh"><h2>Мой заказ</h2><button data-a="x" aria-label="Закрыть">✕</button></div><div class="emp">Список пуст. Нажмите «+» у блюда, чтобы добавить его.</div></div>';
-  else if(ord.classList.contains("wm"))h='<div class="oi"><button class="wb" data-a="back">← Назад</button>'+order.map(function(o,i){return'<div class="wl"><i>'+(i+1)+".</i><span>"+oname(o)+"</span><em>× "+o.q+"</em></div>"}).join("")+'<div class="wt"><span>Итого</span><b>'+fmt(tot())+"₽</b></div></div>";
+  else if(ord.classList.contains("wm"))h='<div class="oi"><button class="wb" data-a="back">← Назад</button>'+order.map(function(o,i){return'<div class="wl"><i>'+(i+1)+".</i><span>"+oname(o)+"</span><em>× "+o.q+"</em></div>"}).join("")+'<div class="wt"><span>Итого</span><b>'+fmt(tot())+"₽</b></div>"+'<div class="wact"><button data-a="copy">Скопировать список</button><button data-a="share">Поделиться списком</button></div><div class="wstatus" aria-live="polite"></div></div>';
   else{var hasD=order.some(function(o){return dishes[o.id].cat===DES}),hasP=order.some(function(o){var d=dishes[o.id];return d.cat===PEL&&d.sub!==SAU}),hasS=order.some(function(o){return dishes[o.id].sub===SAU});
     h='<div class="oi"><div class="oh"><h2>Мой заказ</h2><button data-a="x" aria-label="Закрыть">✕</button></div><div class="warn"><b>!</b>Это список ваших блюд, он хранится только в вашем телефоне и никуда не отправляется: продиктуйте или покажите его официанту. Сумма в списке без учёта скидок и акций.</div>'+
     order.map(function(o,i){var v=ov(o);return'<div class="or">'+thumb(o)+'<div class="nm">'+oname(o)+'</div><div class="rw"><div class="qty"><button data-a="-" data-i="'+i+'" aria-label="Меньше">−</button><b>'+o.q+'</b><button data-a="+" data-i="'+i+'" aria-label="Больше">+</button></div><span class="lp">'+fmt(o.q*v.p)+"₽</span></div></div>"}).join("")+
@@ -279,6 +286,8 @@ function rord(){var h;
     '<div class="ot"><span>Итого</span><b>'+fmt(tot())+'₽</b></div><button class="big" data-a="show">Показать официанту</button><button class="lnk" data-a="clr">Очистить список</button></div>'}
   ord.innerHTML=h}
 ord.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a,i=+b.dataset.i,o=order[i];
+  if(a==="copy"){copyText(orderText(),function(){setShareStatus("Список скопирован")});return}
+  if(a==="share"){var txt=orderText();if(navigator.share){navigator.share({title:"Мой список — ТАМИ",text:txt}).then(function(){setShareStatus("Список отправлен")}).catch(function(err){if(err&&err.name!=="AbortError")setShareStatus("Не удалось открыть меню отправки")})}else{copyText(txt,function(){setShareStatus("Функция отправки недоступна — список скопирован")})}return}
   if(a==="+")o.q++;else if(a==="-"){o.q--;if(o.q<1)order.splice(i,1)}else if(a==="del")order.splice(i,1);
   else if(a==="show")ord.classList.add("wm");else if(a==="back")ord.classList.remove("wm");
   else if(a==="clr"){if(confirm("Очистить весь список?"))order=[]}else if(a==="ups"){closeO();setTimeout(goDes,80);return}else if(a==="sau"){closeO();setTimeout(goSau,80);return}else if(a==="x"){closeO();return}
